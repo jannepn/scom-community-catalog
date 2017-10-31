@@ -52,8 +52,8 @@ mkdir $NewPackEntry.ManagementPackSystemName
 
 $OutPath = "{0}\{1}" -f $NewPackEntry.ManagementPackSystemName, "details.json"
 $OutPathReadme = "{0}\{1}" -f $NewPackEntry.ManagementPackSystemName, "ReadMe.md"
-"### " + $NewPackEntry.ManagementPackDisplayName | Out-File $OutPathReadme
-$NewPackEntry | ConvertTo-Json | Out-File $OutPath
+"### " + $NewPackEntry.ManagementPackDisplayName | Out-File $OutPathReadme -Encoding ascii
+$NewPackEntry | ConvertTo-Json | Out-File $OutPath -Encoding ascii
     
 
 # Look for index, 
@@ -70,5 +70,5 @@ else
 $ThisPack = New-Object IndexEntry
 $ThisPack.ManagementPackSystemName = $NewPackEntry.ManagementPackSystemName
 $MPIndex += $ThisPack
-$MPIndex | sort -Property ManagementPackSystemName -Unique | ConvertTo-Json |Out-File Index.json -Force
+$MPIndex | sort -Property ManagementPackSystemName -Unique | ConvertTo-Json |Out-File Index.json -Force -Encoding ascii
 &$OutPathReadme
